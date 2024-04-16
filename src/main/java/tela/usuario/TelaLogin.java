@@ -60,6 +60,8 @@ public class TelaLogin extends JFrame {
                 if (emailText.equals("admin1") && senhaText.equals("123Mudar"))
                 {
                     JOptionPane.showMessageDialog(TelaLogin.this, "Login bem-sucedido! ");
+                    abrirTelaCadastro();
+                    dispose(); //fechar tela de login apos o login ser bem sucedido
                 }
 
                 else {
@@ -67,10 +69,14 @@ public class TelaLogin extends JFrame {
 
                 }
 
+
             }
         });
 
 
-
+    }
+    private void abrirTelaCadastro() {
+        TelaCadastroDeLivros telaCadastroDeLivros = new TelaCadastroDeLivros();
+        telaCadastroDeLivros.setVisible(true); //Metodo para abrir a proxima tela.
     }
 }

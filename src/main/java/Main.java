@@ -11,9 +11,6 @@ public class Main {
                 TelaLogin telaLogin = new TelaLogin();
                 telaLogin.setVisible(true);
 
-                TelaCadastroDeLivros telaCadastroLivros = new TelaCadastroDeLivros();
-                telaCadastroLivros.setVisible(true);
-
             }
         });
 

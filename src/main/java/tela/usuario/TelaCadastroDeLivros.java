@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
     public class TelaCadastroDeLivros extends JFrame{
         private JTextField Titulo;
         private JTextField Autor;
-        private JTextField Genero;
+        private JComboBox Genero;
         private JButton botaoSalvar;
         private JButton botaoCancelar;
+        private Avaliacao avaliacao;
+
 
         public TelaCadastroDeLivros() {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,13 +42,22 @@ import java.awt.event.ActionListener;
             add(Autor, gbc);
 
             gbc.gridx = 0;
-            gbc.gridy = 3;
+            gbc.gridy = 2;
             add(new JLabel("Gênero:"), gbc);
 
             gbc.gridx = 1;
-            gbc.gridy = 3;
-            Genero= new JTextField(20);
+            gbc.gridy = 2;
+            Genero = new JComboBox<>(new String[]{"Ficção", "Suspense", "Romance", "Aventura", "Fantasia", "Terror"});
             add(Genero, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            add(new JLabel("Avaliação:"), gbc);
+
+            gbc.gridx = 1;
+            gbc.gridy = 3;
+            avaliacao = new Avaliacao(0); // Inicializa com 0 estrelas
+            add(avaliacao, gbc);
 
             // Adiciona botões de salvar e cancelar
             gbc.gridx = 0;
@@ -66,7 +77,8 @@ import java.awt.event.ActionListener;
                 public void actionPerformed(ActionEvent e) {
                     String titulo = Titulo.getText();
                     String autor = Autor.getText();
-                    String genero = Genero.getText();
+                    String genero = (String) Genero.getSelectedItem();
+                    int avaliacaoValue = avaliacao.getAvaliacao();
 
 
                     // Verifica se todos os campos foram preenchidos
