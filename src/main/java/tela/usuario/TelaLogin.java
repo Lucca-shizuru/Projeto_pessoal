@@ -10,6 +10,8 @@ public class TelaLogin extends JFrame {
     private JPasswordField senha;
     private JButton login;
 
+    private JButton cadastrar;
+
     public TelaLogin() {
         super("Bem vindo ao Read Wise");
 
@@ -46,21 +48,26 @@ public class TelaLogin extends JFrame {
         login = new JButton("Login");
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.gridwidth = 2; // Ocupa duas colunas
+        gbc.gridwidth = 1; // Ocupa duas colunas
         gbc.fill = GridBagConstraints.HORIZONTAL; // Estica horizontalmente
         add(login, gbc);
 
+        cadastrar = new JButton("Cadastrar");
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        add(cadastrar, gbc);
 
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e ){
                 String emailText = email.getText();
                 String senhaText = String.valueOf(senha.getPassword());
+                Usuario usuario = UsuarioDatabase.buscarUsuarioPorEmailESenha(emailText, senhaText); // metodo, para puxar os dados adicionados na tela de cadastro
 
-                if (emailText.equals("admin1") && senhaText.equals("123Mudar"))
+                if (usuario != null) //if  else, referente ao que foi adicionado
                 {
                     JOptionPane.showMessageDialog(TelaLogin.this, "Login bem-sucedido! ");
-                    abrirTelaCadastro();
+                    abrirTelaCadastroDeLivros();
                     dispose(); //fechar tela de login apos o login ser bem sucedido
                 }
 
@@ -72,11 +79,22 @@ public class TelaLogin extends JFrame {
 
             }
         });
+        cadastrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirTelaCadastro(); // Chama o método para abrir a tela de cadastro
+            }
+        });
 
 
     }
-    private void abrirTelaCadastro() {
+    private void abrirTelaCadastroDeLivros() {
         TelaCadastroDeLivros telaCadastroDeLivros = new TelaCadastroDeLivros();
         telaCadastroDeLivros.setVisible(true); //Metodo para abrir a proxima tela.
+    }
+
+    private void abrirTelaCadastro(){
+        TelaCadastroUsuario telaCadastroUsuario = new TelaCadastroUsuario();
+        telaCadastroUsuario.setVisible(true); //metodo para abrir tela de cadastro
     }
 }
